@@ -1,3 +1,5 @@
+var currentProblem;
+
 var createRandomInt = function (max) {
     return Math.floor(Math.random() * max);
 }
@@ -7,10 +9,17 @@ var createProblem = function () {
     var numOne = createRandomInt(10);
     var numTwo = createRandomInt(10);
     problem.answer = numOne + numTwo;
-    problem.equation = String(numOne) + "+" + String(numTwo);
+    problem.equation = String(numOne) + " + " + String(numTwo);
+
 
     return problem;
 }
 
-console.log(createProblem());
-console.log(createProblem());
+$(document).ready(function () {
+    currentProblem = createProblem();
+    $('#problem').text(currentProblem.equation);
+
+    $('#user-input').on('keyup', function () {
+        console.log($(this).val());
+    })
+})
