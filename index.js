@@ -15,11 +15,26 @@ var createProblem = function () {
     return problem;
 }
 
-$(document).ready(function () {
+var renderNewProblem = function () {
     currentProblem = createProblem();
     $('#problem').text(currentProblem.equation);
+}
+
+var checkAnswer = function (userInput, answer) {
+    if (userInput === answer) {
+        renderNewProblem();
+        $('#user-input').val('');
+    }
+}
+
+
+
+$(document).ready(function () {
+    
 
     $('#user-input').on('keyup', function () {
-        console.log($(this).val());
+        checkAnswer(Number($(this).val()), currentProblem.answer);
     })
+
+    renderNewProblem();
 })
