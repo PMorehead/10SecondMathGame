@@ -1,11 +1,16 @@
 var currentProblem;
 var timeleft = 10;
 var score = 0;
+var highScore = 0;
 var interval;
 
 var updateScore = function (amount) {
     score += amount;
     $('#score').text(score);
+    if (score > highScore) {
+        highScore = score;
+        $('#high-score').text(highScore);
+    }
 }
 
 var updateTimeLeft = function (amount) {
@@ -18,8 +23,8 @@ var createRandomInt = function (max) {
 
 var createProblem = function () {
     var problem = {};
-    var numOne = createRandomInt(10);
-    var numTwo = createRandomInt(10);
+    var numOne = createRandomInt($('#range').val());
+    var numTwo = createRandomInt($('#range').val());
     problem.answer = numOne + numTwo;
     problem.equation = String(numOne) + " + " + String(numTwo);
 
@@ -64,6 +69,10 @@ $(document).ready(function () {
     $('#user-input').on('keyup', function () {
         startGame();
         checkAnswer(Number($(this).val()), currentProblem.answer);
+    })
+
+    $('#range').on('keyup', function () {
+        renderNewProblem();
     })
 
     renderNewProblem();
