@@ -1,6 +1,12 @@
 var currentProblem;
 var timeleft = 10;
+var score = 0;
 var interval;
+
+var updateScore = function (amount) {
+    score += amount;
+    $('#score').text(score);
+}
 
 var updateTimeLeft = function (amount) {
     timeleft += amount;
@@ -31,6 +37,7 @@ var checkAnswer = function (userInput, answer) {
         renderNewProblem();
         $('#user-input').val('');
         updateTimeLeft(+1);
+        updateScore(+1);
     }
 }
 
@@ -38,6 +45,7 @@ var startGame = function () {
     if (!interval) {
         if (timeleft === 0) {
             updateTimeLeft(10);
+            updateScore(-score);
         }
             interval = setInterval(function () {
             updateTimeLeft(-1);
@@ -59,6 +67,4 @@ $(document).ready(function () {
     })
 
     renderNewProblem();
-
-    
 })
