@@ -18,7 +18,7 @@ var updateTimeLeft = function (amount) {
     $('#time-left').text(timeleft);
 }
 var createRandomInt = function (max) {
-    return Math.floor(Math.random() * max);
+    return Math.floor(Math.random() * max) + 1;
 }
 
 var createProblem = function () {
